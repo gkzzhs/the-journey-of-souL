@@ -1,0 +1,536 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* 动态背景 - 更柔和的苹果风格 */
+:root {
+  --emotion-color: #8bb3f4;
+  --emotion-gradient: 135deg, #f5f9ff 0%, #f7f9f7 50%, #faf7fa 100%;
+  --bubble-opacity: 0.5;
+  --bubble-size: 35%;
+  --animation-speed: 30s;
+  --animation-intensity: 1;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f9ff 0%, #f7f9f7 50%, #faf7fa 100%);
+  transition: background 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, var(--bubble-opacity)) 0%, rgba(255, 255, 255, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(255, 255, 255, var(--bubble-opacity)) 0%, rgba(255, 255, 255, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(255, 255, 255, var(--bubble-opacity)) 0%, rgba(255, 255, 255, 0) var(--bubble-size));
+  z-index: 0;
+  animation: moveBubbles var(--animation-speed) infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  transition: background 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0.7;
+}
+
+/* 情绪特定动画 */
+.app-container.animate-background::before {
+  animation: moveBubbles var(--animation-speed) infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+/* 开心情绪 - 柔和的气泡动画 */
+.app-container.theme-sunshine::before {
+  --bubble-opacity: 0.5;
+  --bubble-size: 35%;
+  --animation-speed: 25s;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(255, 165, 0, 0.2) 0%, rgba(255, 165, 0, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0) var(--bubble-size));
+}
+
+/* 焦虑情绪 - 柔和的紫色渐变 */
+.app-container.theme-healing::before {
+  --bubble-opacity: 0.4;
+  --bubble-size: 40%;
+  --animation-speed: 30s;
+  background: radial-gradient(circle at 30% 20%, rgba(147, 112, 219, 0.2) 0%, rgba(147, 112, 219, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(147, 112, 219, 0.1) 0%, rgba(147, 112, 219, 0) var(--bubble-size));
+}
+
+/* 平静情绪 - 柔和的蓝色波纹 */
+.app-container.theme-ocean::before {
+  --bubble-opacity: 0.3;
+  --bubble-size: 45%;
+  --animation-speed: 35s;
+  background: radial-gradient(circle at 30% 20%, rgba(135, 206, 235, 0.2) 0%, rgba(135, 206, 235, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(70, 130, 180, 0.15) 0%, rgba(70, 130, 180, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(135, 206, 235, 0.1) 0%, rgba(135, 206, 235, 0) var(--bubble-size));
+}
+
+/* 难过情绪 - 柔和的深蓝色波动 */
+.app-container.theme-comfort::before {
+  --bubble-opacity: 0.3;
+  --bubble-size: 40%;
+  --animation-speed: 35s;
+  background: radial-gradient(circle at 30% 20%, rgba(70, 130, 180, 0.2) 0%, rgba(70, 130, 180, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(30, 58, 138, 0.15) 0%, rgba(30, 58, 138, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(70, 130, 180, 0.1) 0%, rgba(70, 130, 180, 0) var(--bubble-size));
+}
+
+/* 生气情绪 - 柔和的红色效果 */
+.app-container.theme-release::before {
+  --bubble-opacity: 0.3;
+  --bubble-size: 35%;
+  --animation-speed: 30s;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 99, 71, 0.2) 0%, rgba(255, 99, 71, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(255, 99, 71, 0.1) 0%, rgba(255, 99, 71, 0) var(--bubble-size));
+}
+
+/* 疲惫情绪 - 柔和的灰色流动 */
+.app-container.theme-rest::before {
+  --bubble-opacity: 0.25;
+  --bubble-size: 40%;
+  --animation-speed: 40s;
+  background: radial-gradient(circle at 30% 20%, rgba(112, 128, 144, 0.15) 0%, rgba(112, 128, 144, 0) var(--bubble-size)),
+             radial-gradient(circle at 70% 60%, rgba(47, 79, 79, 0.1) 0%, rgba(47, 79, 79, 0) var(--bubble-size)),
+             radial-gradient(circle at 40% 80%, rgba(112, 128, 144, 0.08) 0%, rgba(112, 128, 144, 0) var(--bubble-size));
+}
+
+@keyframes moveBubbles {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  100% {
+    background-position: calc(5% * var(--animation-intensity)) calc(5% * var(--animation-intensity)), 
+                         calc(95% * var(--animation-intensity)) calc(95% * var(--animation-intensity)), 
+                         calc(45% * var(--animation-intensity)) calc(45% * var(--animation-intensity));
+  }
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 毛玻璃效果 - 苹果风格 */
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+}
+
+body.dark-mode .glass-card {
+  background: rgba(30, 30, 30, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(70, 70, 70, 0.3);
+}
+
+/* 头部样式 - 苹果风格居中 */
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-top: 20px;
+  position: relative;
+}
+
+/* 主题切换按钮放在右侧 */
+.theme-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 标题居中 */
+.logo {
+  text-align: center;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.theme-toggle-btn.dark {
+  background: rgba(50, 50, 50, 0.5);
+  border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+.theme-toggle-btn.dark:hover {
+  background: rgba(60, 60, 60, 0.6);
+}
+
+.toggle-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.toggle-text {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.logo h1 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: -0.5px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #e1f5fe;
+  border: 2px solid #fff;
+}
+
+/* 情绪选择器 */
+h2 {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #000;
+  letter-spacing: -0.3px;
+  text-align: center;
+  transition: color 0.5s ease;
+}
+
+body.dark-mode h2 {
+  color: #e0e0e0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 300;
+  transition: color 0.5s ease;
+}
+
+body.dark-mode .subtitle {
+  color: #aaa;
+}
+
+.emotion-selector {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.app-footer {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  font-weight: 300;
+}
+
+.emotion-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 75px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.emotion-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.emotion-item.active {
+  background: rgba(26, 115, 232, 0.1);
+  border: 2px solid #1a73e8;
+}
+
+.emotion-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.emotion-name {
+  font-size: 13px;
+  color: #333;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+}
+
+/* 输入区域 */
+.input-area {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.4);
+  resize: none;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  font-weight: 400;
+}
+
+textarea:focus {
+  border-color: #8bb3f4;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.send-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: #8bb3f4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 22px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.send-button:hover {
+  background-color: #7aa3e4;
+  transform: translateY(-1px);
+}
+
+/* 车票样式 */
+.ticket-container {
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.ticket-container.dark-mode {
+  background: rgba(30, 30, 30, 0.6);
+}
+
+.ticket {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+.ticket.dark-ticket {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.ticket-footer {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px dashed #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.5s ease;
+}
+
+.ticket.dark-ticket .ticket-footer {
+  background-color: #222;
+  border-top: 1px dashed #444;
+}
+
+.ticket-header {
+  background-color: #ffa000;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.flight-info {
+  display: flex;
+  font-size: 12px;
+}
+
+.flight-number {
+  margin-right: 15px;
+}
+
+.ticket-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ticket-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.route-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.departure-info, .arrival-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.departure-label, .arrival-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+body.dark-mode .departure-label, 
+body.dark-mode .arrival-label {
+  color: #aaa;
+}
+
+.departure-name, .arrival-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.arrival {
+  text-align: right;
+}
+
+.flight-path {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.path-line {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+  background: #ddd;
+  position: relative;
+}
+
+body.dark-mode .line {
+  background: #555;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3B82F6;
+}
+
+.departure-dot {
+  background: #4CAF50;
+}
+
+.arrival-dot {
+  background: #F44336;
+}
+
+.plane-icon-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.plane-icon {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.plane-icon.flying {
+  transform: translateY(0);
+  opacity: 1;
+}
