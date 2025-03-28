@@ -19,8 +19,8 @@
 1. 克隆仓库
 
 ```bash
-git clone https://github.com/gkzzhs/心灵之旅.git
-cd 心灵之旅
+git clone https://github.com/gkzzhs/the-journey-of-soul.git
+cd the-journey-of-soul
 ```
 
 2. 安装依赖
@@ -55,7 +55,7 @@ git init
 git add .
 git commit -m "初始提交"
 git branch -M main
-git remote add origin https://github.com/gkzzhs/心灵之旅.git
+git remote add origin https://github.com/gkzzhs/the-journey-of-soul.git
 git push -u origin main
 ```
 
