@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_DEEPSEEK_API_KEY = "sk-587f8ddfd6784836b0f7828067e9b01e"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
